@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='calc.css') }}">
+</head>
+<body>
+    <div class="container">
+        <input type="text" class="screen" id="screen" readonly>
+        
+        <div class="rows">
+            <div class="number action" onclick="clearScreen()">AC</div>
+            <div class="number action" onclick="appendValue('%')">%</div>
+            <div class="number action" onclick="deleteLast()">⌫</div>
+            <div class="number operator" onclick="appendValue('/')">/</div>
+        </div>
+
+        <div class="rows">
+            <div class="number" onclick="appendValue('7')">7</div>
+            <div class="number" onclick="appendValue('8')">8</div>
+            <div class="number" onclick="appendValue('9')">9</div>
+            <div class="number operator" onclick="appendValue('*')">*</div>
+        </div>
+
+        <div class="rows">
+            <div class="number" onclick="appendValue('4')">4</div>
+            <div class="number" onclick="appendValue('5')">5</div>
+            <div class="number" onclick="appendValue('6')">6</div>
+            <div class="number operator" onclick="appendValue('-')">-</div>
+        </div>
+
+        <div class="rows">
+            <div class="number" onclick="appendValue('1')">1</div>
+            <div class="number" onclick="appendValue('2')">2</div>
+            <div class="number" onclick="appendValue('3')">3</div>
+            <div class="number operator" onclick="appendValue('+')">+</div>
+        </div>
+
+        <div class="rows">
+            <div class="number" onclick="appendValue('00')">00</div>
+            <div class="number" onclick="appendValue('0')">0</div>
+            <div class="number" onclick="appendValue('.')">.</div>
+            <div class="number equal" onclick="calculate()">=</div>
+        </div>
+    </div>
+
+    <script>
+        const screen = document.getElementById('screen');
+
+        function appendValue(value) {
+            screen.value += value;
+        }
+
+        function clearScreen() {
+            screen.value = '';
+        }
+
+        function deleteLast() {
+            screen.value = screen.value.slice(0, -1);
+        }
+
+        function calculate() {
+            try {
+                screen.value = eval(screen.value);
+            } catch (error) {
+                screen.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
